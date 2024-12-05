@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React, { useState, useEffect } from 'react';
 
 function App() {
+	
+		const [text, setText] = useState('');
+		const [count, setCount] = useState(0);
+		const renderCount = React.useRef(0);
+	
+		useEffect(() => {
+			renderCount.current += 1;
+			console.log(`Component rendered ${renderCount.current} times`);
+		});
+	
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+			<div style={{ padding: '20px', }}>
+      <h1>Render Logger</h1>
+      <div style={{ marginBottom: '10px' }}>
+        <label>
+          Text Input:
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            style={{ marginLeft: '10px', padding: '5px' }}
+          />
+        </label>
+      </div>
+      <div style={{ marginBottom: '10px' }}>
+        <button onClick={() => setCount(count + 1)} style={{ padding: '5px 10px', cursor: 'pointer' }} >
+          Increment Count
+					</button>
+      </div>
+      <p>Text: {text}</p>
+      <p>Count: {count}</p>
+    </div>
     </div>
   );
 }
